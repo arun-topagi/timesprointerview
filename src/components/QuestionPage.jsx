@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { useReactMediaRecorder } from "react-media-recorder";
 import VideoRecorder from "react-video-recorder";
-import { useModal, Modal } from "react-morphing-modal";
 import "./QuestionPage.scss";
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { changeInterviewStatus, setSelectedQuestion } from "../redux/actions/interviewActions";
 import { Button } from "@mui/material";
@@ -11,9 +8,7 @@ import { useNavigate } from "react-router-dom";
 
 const QuestionPage = () => {
   const navigate = useNavigate();
-  const { status, startRecording, stopRecording, mediaBlobUrl } =
-    useReactMediaRecorder({ video: true });
-  // const [questionIndex, setQuestionIndex] = useState(0);
+
   const [userTimeLimit, setUserTimeLimit] = useState(30000);
   const [userCountDown, setUserCountDown] = useState(3000);
   const [counter, setCounter] = React.useState(60);
@@ -22,7 +17,6 @@ const QuestionPage = () => {
   const interviewState = useSelector((state)=>state.interview);
   const queIndex = question.index;
   const dispatch = useDispatch();
-
 
   // const { modalProps, getTriggerProps } = useModal({});
 
@@ -43,6 +37,7 @@ const QuestionPage = () => {
       <div className="VideoandControlls">
       <div  style={{height:'70vh', width:'60vw'}}>
             <VideoRecorder
+            isOnInitially={true}  
               countdownTime={userCountDown}
               timeLimit={userTimeLimit}
               showReplayControls={true}

@@ -2,7 +2,6 @@ import React from "react";
 import { Button, MenuItem, Select, InputLabel, TextField } from "@mui/material";
 import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
-import q from "../question.json";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { saveQuestions } from "../redux/actions/interviewActions";
@@ -21,13 +20,10 @@ const Admin = () => {
     setQuestionState([...questionState]);
   }
 
-  const Delete = (e,key) => {
-    console.log(key, e);
-    // const newArr = questionState.filter((value, index) => index !== key+1);
-    // console.log("hahha",newArr); // Output: [1, 2, 4, 5]
-    // setQuestionState(newArr)
-    setQuestionState([...questionState.filter((value, index) => value !== questionState[key])])
-    
+  const Delete = (key) => {
+    console.log(key);
+    const newArr = questionState.filter((value, index) => index !== key);
+    setQuestionState(newArr)
   };
 
   const Edit = () => {
@@ -67,7 +63,8 @@ const Admin = () => {
           overflowY:'scroll'
         }}
       >
-        {questionState.map((item, key) => {
+        {
+        questionState.map((item, key) => {
           return (
             <div
               style={{
@@ -87,16 +84,15 @@ const Admin = () => {
                   placeholder="Placeholder"
                   multiline
                   variant="outlined"
-                  defaultValue={questionState[key]}
+                  defaultValue={item}
                   disabled={disabled}
-                  // key={key}
+                  key={item}
                 />
               </div>
               <EditNoteRoundedIcon style={{ fontSize: "30px" }}  color="error" onClick={Edit}/>
-              <DeleteRoundedIcon style={{ fontSize: "30px" }} color="error" onClick={() => Delete(item, key)}/>
+              <DeleteRoundedIcon style={{ fontSize: "30px" }} color="error" onClick={()=>Delete(key)}/>
               <InputLabel id="demo-simple-select-helper-label">Category {key+1}</InputLabel>
             <Select
-          
           //labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
         //   value={age}
