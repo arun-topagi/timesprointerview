@@ -2,39 +2,25 @@ import React from "react";
 import { Button, MenuItem, Select, InputLabel, TextField } from "@mui/material";
 import EditNoteRoundedIcon from '@mui/icons-material/EditNoteRounded';
 import DeleteRoundedIcon from '@mui/icons-material/DeleteRounded';
+import q from "../question.json";
 import { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { saveQuestions } from "../redux/actions/interviewActions";
+
+console.log(q.General);
 
 const Admin = () => {
-  const dispatch = useDispatch();
   const [disabled, setDisabled] = useState("{}");
-  const questions = useSelector((state)=>state.question.question);
-  // question's state
-  const [questionState, setQuestionState] = useState(questions); //=> ["value1","value2","newValue"]
-  // console.log(questionState);
-
-
-  const handleChangeQuestion=(value,key)=>{
-    questionState[key] = value;
-    setQuestionState([...questionState]);
-  }
 
   const Delete = (key) => {
     console.log(key);
-    const newArr = questionState.filter((value, index) => index !== key);
-    setQuestionState(newArr)
   };
 
   const Edit = () => {
+    console.log("Edit");
     setDisabled("");
   };
-  const AddNewQuestion = () => {
-    setQuestionState([...questionState,""]);
-  };
+  const AddNewQuestion = () => {};
 
   const SaveNewQuestion = () => {
-    dispatch(saveQuestions(questionState));
     setDisabled("disabled");
   };
 
@@ -49,7 +35,7 @@ const Admin = () => {
     <div
       className="Admin" >
         <div style={{ display: "flex", justifyContent: "flex-end", marginTop:'10px'}}>
-          <Button variant="contained" color="error" onClick={AddNewQuestion}>
+          <Button variant="contained" color="error">
             Add New Question
           </Button>
         </div>
@@ -59,19 +45,16 @@ const Admin = () => {
           width: "90vw",
           display: "flex",
           flexDirection: "column",
-          overflow:'hidden',
-          overflowY:'scroll'
+          justifyContent: "space-evenly",
         }}
       >
-        {
-        questionState.map((item, key) => {
+        {[1, 2, 3].map((item, key) => {
           return (
             <div
               style={{
                 display: "flex",
                 justifyContent: "space-around",
                 alignItems: "center",
-                marginBottom:'20px'
               }}
             >
               <div style={{ display: "flex" }}>
@@ -80,19 +63,18 @@ const Admin = () => {
                   style={{ width: "400px" }}
                   id="outlined-textarea"
                   //   label="Multiline Placeholder"
-                  onChange={(e)=>handleChangeQuestion(e.target.value,key)}
                   placeholder="Placeholder"
                   multiline
                   variant="outlined"
-                  defaultValue={item}
+                  defaultValue={q.General[key + 1]}
                   disabled={disabled}
-                  key={item}
                 />
               </div>
               <EditNoteRoundedIcon style={{ fontSize: "30px" }}  color="error" onClick={Edit}/>
-              <DeleteRoundedIcon style={{ fontSize: "30px" }} color="error" onClick={()=>Delete(key)}/>
+              <DeleteRoundedIcon style={{ fontSize: "30px" }} color="error" onClick={Delete}/>
               <InputLabel id="demo-simple-select-helper-label">Category {key+1}</InputLabel>
             <Select
+          
           //labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
         //   value={age}
@@ -123,3 +105,11 @@ const Admin = () => {
 };
 
 export default Admin;
+
+
+
+
+
+
+
+        
