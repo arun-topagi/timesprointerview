@@ -1,9 +1,12 @@
 import { ActionTypes } from "../constants/action-types"
 
-const questions = require("../../question.json");
+// const questions = require("../../question.json");
 
 const initialState = {
-    question:questions.General[0],
+    question:[
+        "Tell Me About Yourself ?",
+        "Why do you want to work for X company ?",
+    ],
     index:0,
 }
 
@@ -12,8 +15,18 @@ export const questionReducer = (state = initialState, action) => {
         case ActionTypes.SELECTED_QUESTION:
             return {
                 ...state,
-                question:questions.General[action.payload],
                 index:action.payload
+            };
+        case ActionTypes.SAVE_QUESTION_CHANGES:
+            return {
+                ...state,
+                question:action.payload
+            }
+            case ActionTypes.DELETE_QUESTIONS:
+               const newQues = state.question.filter((elem,key)=>key!==action.id)
+            return {
+                ...state,
+                 question: newQues
             };
         default:
             return state;

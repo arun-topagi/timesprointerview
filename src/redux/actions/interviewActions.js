@@ -13,3 +13,27 @@ export const setSelectedQuestion = (index) => {
         payload: index
     }
 }
+
+export const startInterview=()=>{
+    return {
+        type:ActionTypes.START_INTERVIEW
+    }
+}
+export const changeInterviewStatus=()=>{
+    return {
+        type:ActionTypes.CHANGE_INTERVIEW_STATUS
+    }
+}
+export const saveQuestions=(payload)=>{
+    return {
+        type:ActionTypes.SAVE_QUESTION_CHANGES,
+        payload:payload
+    }
+}
+
+export const deleteQuestion=(id) =>{
+    return{
+        type: ActionTypes.DELETE_QUESTIONS,
+        id
+    }
+}
