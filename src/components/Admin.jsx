@@ -86,12 +86,13 @@ const Admin = () => {
                     id="outlined-textarea"
                     //   label="Multiline Placeholder"
                     onChange={(e) => handleChangeQuestion(e.target.value, key)}
-                    placeholder="Placeholder"
+                    placeholder="Enter a New Question"
                     multiline
                     variant="outlined"
-                    defaultValue={item}
+                    // defaultValue={item}
                     disabled={disabled}
-                    key={item[key]}
+                    // key={item[key]}
+                    value={item}
                   />
                 </div>
                 <EditNoteRoundedIcon

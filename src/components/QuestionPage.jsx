@@ -39,45 +39,29 @@ const QuestionPage = () => {
     window.location.reload(false);
   };
 
-  // const start =  (countDown, limit) =>{
-  //   console.log(countDown, limit)
-  //   console.log(star)
-  //   isStar(!star)
-  //   console.log(star)
-  // }
-  // const stop =  () =>{
-  //   console.log("hgahaga")
-  //   // this.isFlipped= true
-  //   // isFlipped(false) 
-  //   console.log(star)
-  //   isStar(!star)
-  //   console.log(star)
-  // }
 
-  // const yelo = (a) =>{
-  //   console.log("yeshshshs",a)
-  // }
-
-  // const CONSTRAINTS = {
-  //   audio: true,
-  //   video: {
-  //     facingMode: { exact: 'environment' },
-  //   },
-  // };
-
-  const [seconds, setSeconds] = useState(33);
+  const [count, setCount] = useState(3);
+  const [isFirstCountdown, setIsFirstCountdown] = useState(true);
   const [isRecording, setIsRecording] = useState(false);
 
   useEffect(() => {
-    if (isRecording) {
-      if (seconds > 0) {
-        setTimeout(() => setSeconds(seconds - 1), 1000);
+    let timerId;
+    if(isRecording)
+    {
+      if (count > 0) {
+        timerId = setTimeout(() => {
+          setCount(count - 1);
+        }, 1000);
+      } else if (isFirstCountdown) {
+        setIsFirstCountdown(false);
+        setCount(30);
       } else {
-        setIsRecording(false);
-        setSeconds(33);
+        // Second countdown has ended
+        // Do something else here
       }
     }
-  }, [isRecording, seconds]);
+    return () => clearTimeout(timerId);
+  }, [count, isFirstCountdown, isRecording]);
 
 
 
@@ -151,8 +135,8 @@ const QuestionPage = () => {
           <div>
             Retake :<br></br>Unlimited
           </div>
-          <div>ThinkTime: {userCountDown}</div>
-          <div>Duration: {isRecording && <div>{seconds}</div>}</div>
+          <div>{isFirstCountdown?<p>ThinkTime:{count} seconds</p>:<p>ThinkTime:{0} seconds</p>}</div>
+          <div>{isFirstCountdown ? <p> Doration: {30} seconds</p> : <p>Duration: {count} seconds</p>}</div>
         </div>
       </div>
       <div
