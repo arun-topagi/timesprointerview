@@ -1,6 +1,5 @@
 import { ActionTypes } from "../constants/action-types"
 
-const questions = require("../../question.json");
 
 const initialState = {
     isStart : false

@@ -8,7 +8,6 @@ import {
 } from "../redux/actions/interviewActions";
 import { Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { color } from "framer-motion";
 
 
 const QuestionPage = () => {
