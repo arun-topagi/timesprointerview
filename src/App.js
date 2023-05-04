@@ -21,10 +21,3 @@ function App() {
 }
 
 export default App;
-
-
-{/* <h1>Time's Pro Interview</h1>
-      <div className="app-content">
-      {/* <QuestionPage/> */}
-      // </div>
-      // <Admin/>  */}
